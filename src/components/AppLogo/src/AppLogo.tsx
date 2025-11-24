@@ -7,9 +7,8 @@ import logoImg from '@/assets/images/logo.png'
 
 const AppLogo: FC = () => {
   const getMenuFold = useAppSelector(state => state.app.appConfig?.menuSetting?.menuFold)
-  const shopSetting = useAppSelector(state => (state as any).shop?.setting)
-  const logoSrc = shopSetting?.logo_url || logoImg
-  const title = shopSetting?.name || '餐饮零售管理系统'
+  const logoSrc = logoImg
+  const title = '餐饮零售管理系统'
 
   return (
     <div className={classNames('anticon', styles['app-logo'])}>

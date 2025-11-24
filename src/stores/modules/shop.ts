@@ -21,10 +21,10 @@ const shop = createSlice({
   initialState,
   reducers: {
     setShopSetting: (state, action) => {
-      state.setting = action.payload || null
+      Object.assign(state, action.payload)
     },
     resetShopSetting: state => {
-      state.setting = null
+      Object.assign(state, initialState)
     }
   }
 })

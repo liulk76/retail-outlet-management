@@ -8,9 +8,6 @@ import { setToken, setUserInfo, setSessionTimeout } from '@/stores/modules/user'
 import { getAuthCache } from '@/utils/auth'
 import { TOKEN_KEY } from '@/enums/cacheEnum'
 import { supabase } from '@/services/supabaseClient'
-import { getShopSetting } from '@/services/shopSupabase'
-import { setShopSetting } from '@/stores/modules/shop'
-import logoIcon from '@/assets/images/logo_name.png'
 import classNames from 'classnames'
 import styles from './index.module.less'
 
@@ -44,12 +41,6 @@ const LoginPage: FC = () => {
         homePath: '/home'
       }
       dispatch(setUserInfo(info))
-      try {
-        const setting = await getShopSetting()
-        if (setting) {
-          dispatch(setShopSetting(setting))
-        }
-      } catch {}
       const redirect = searchParams.get('redirect')
       if (sessionTimeout) {
         dispatch(setSessionTimeout(false))

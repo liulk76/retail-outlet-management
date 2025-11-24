@@ -148,17 +148,17 @@ const ShopSetting: FC = () => {
                       logo_url: logoUrl,
                       description: values.description
                     }
-                    const ok = await saveShopSetting(payload)
+                    const settingData = await saveShopSetting(payload)
                     setSaveShopInfoLoading(false)
                     setDisableForm(false)
-                    if (ok) {
+                    if (settingData) {
                       message.success('保存成功')
                       setPrevLogoUrl(logoUrl)
                       setImageUrl(logoUrl)
                       setLogoFile(null)
-                      dispatch(setShopSetting(ok))
+                      dispatch(setShopSetting({ setting: settingData }))
                     } else {
-                      dispatch(setShopSetting(payload as any))
+                      message.error('保存失败')
                     }
                   } catch (e) {}
                 }}

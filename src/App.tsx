@@ -62,6 +62,7 @@ function App() {
         clearAuthCache(true)
       }
     })
+
     return () => sub?.subscription?.unsubscribe()
   }, [dispatch])
 
