@@ -22,33 +22,43 @@ jobs:
         run: |
           npm install
           npm run build
-
-      # 1. 清空 Bucket 中的所有旧文件
-      - name: Delete all old files
-        uses: qiujiaqi/kodo-action@v1
+      - uses: hujiulong/action-qiniu-upload@master
         with:
-          access_key: ${{ secrets.QINIU_AK }}
-          secret_key: ${{ secrets.QINIU_SK }}
+          # Your qiniu access key, required.
+          access_key: ${{ secrets.QINIU_ACCESS_KEY }}
+
+          # Your qiniu secret key, required.
+          secret_key: ${{ secrets.QINIU_SECRET_KEY }}
+
+          # Bucket name, required.
           bucket: retail-outlet-management
-          remove: /
 
-      # 2. 上传 dist 到七牛云
-      - name: Upload new files
-        uses: qiujiaqi/kodo-action@v1
-        with:
-          access_key: ${{ secrets.QINIU_AK }}
-          secret_key: ${{ secrets.QINIU_SK }}
-          bucket: retail-outlet-management
-          source_dir: dist
-          overwrite: true
+          # The local directory (or file) you want to upload to bucket.
+          # Default: './'
+          source_dir: 'dist'
 
-      # 3. 刷新 CDN 缓存
-      - name: Refresh Qiniu CDN
-        uses: tea3k/qiniu-cdn-purge@v1.0.2
-        with:
-          access_key: ${{ secrets.QINIU_AK }}
-          secret_key: ${{ secrets.QINIU_SK }}
-          urls: |
-            https://t67ygksm5.hn-bkt.clouddn.com/
-          dirs: |
-            https://t67ygksm5.hn-bkt.clouddn.com/
+          # The directory inside of the bucket you want to upload to, namely key prefix prepended to dest file key.
+          # Default: '/'
+          dest_dir: '/'
+
+          # Overwrite strategy for existing files
+          # 'smart' (default): overwrites code files (.html, .js, .css, etc.) but skips media files (.jpg, .png, .mp4, etc.)
+          # 'always': always overwrite existing files
+          # 'never': never overwrite, skip existing files
+          overwrite: 'always'
+
+          # Custom patterns for files to always overwrite (comma-separated)
+          # Example: '*.min.js,build/*,dist/*.css'
+          overwrite_patterns: ''
+
+          # Custom patterns for files to always skip (comma-separated)
+          # Example: '*.log,temp/*'
+          skip_patterns: ''
+
+          # Whether to ignore source maps.
+          # Default: true
+          ignore_source_map: true
+
+          # Support concurrency
+          # Default: 5
+          concurrency: 5
