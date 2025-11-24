@@ -1,0 +1,54 @@
+name: Deploy to Qiniu Kodo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+
+      # 1. 清空 Bucket 中的所有旧文件
+      - name: Delete all old files
+        uses: qiujiaqi/kodo-action@v1
+        with:
+          access_key: ${{ secrets.QINIU_AK }}
+          secret_key: ${{ secrets.QINIU_SK }}
+          bucket: retail-outlet-management
+          remove: /
+
+      # 2. 上传 dist 到七牛云
+      - name: Upload new files
+        uses: qiujiaqi/kodo-action@v1
+        with:
+          access_key: ${{ secrets.QINIU_AK }}
+          secret_key: ${{ secrets.QINIU_SK }}
+          bucket: retail-outlet-management
+          source_dir: dist
+          overwrite: true
+
+      # 3. 刷新 CDN 缓存
+      - name: Refresh Qiniu CDN
+        uses: tea3k/qiniu-cdn-purge@v1.0.2
+        with:
+          access_key: ${{ secrets.QINIU_AK }}
+          secret_key: ${{ secrets.QINIU_SK }}
+          urls: |
+            https://t67ygksm5.hn-bkt.clouddn.com/
+          dirs: |
+            https://t67ygksm5.hn-bkt.clouddn.com/
