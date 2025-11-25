@@ -106,6 +106,7 @@ const TableBasic: FC = () => {
       sorter: true,
       align: 'right',
       width: 150,
+      hidden: true,
       render: v => yuan(v)
     },
     {
@@ -114,6 +115,7 @@ const TableBasic: FC = () => {
       width: 80,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button style={{ display: 'inline', padding: 0, height: 'auto' }} type='link'>

@@ -59,6 +59,7 @@ const MemberList: FC = () => {
     },
     {
       title: '操作',
+      hidden: true,
       key: 'action',
       width: 160,
       fixed: 'right',
@@ -203,9 +204,9 @@ const MemberList: FC = () => {
               }}
             >
               <Space>
-                <Button disabled={tableLoading} type='primary' onClick={() => openEditModal()} icon={<PlusOutlined />}>
+                {/* <Button disabled={tableLoading} type='primary' onClick={() => openEditModal()} icon={<PlusOutlined />}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   disabled={tableLoading}
                   type='primary'

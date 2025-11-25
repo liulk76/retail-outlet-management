@@ -1,6 +1,6 @@
 import type { ColumnsType } from 'antd/es/table'
 import { type FC, useEffect, useState } from 'react'
-import { Button, Card, Col, Divider, Form, Input, Row, Select, Space, Table } from 'antd'
+import { Button, Card, Col, Divider, Form, Input, Row, Select, Space, Table, Tag } from 'antd'
 import { ClearOutlined, SearchOutlined } from '@ant-design/icons'
 import { PageWrapper } from '@/components/Page'
 import { getPointsProductList } from '@/api'
@@ -20,13 +20,14 @@ const ProductList: FC = () => {
     { title: '市场价', dataIndex: 'marketPrice', sorter: true, align: 'right', width: 120 },
     { title: '兑换所需积分', dataIndex: 'needPoints', sorter: true, align: 'right', width: 140 },
     { title: '添加日期', dataIndex: 'addDate', sorter: true, width: 180 },
-    { title: '状态', dataIndex: 'status', width: 100 },
+    { title: '状态', dataIndex: 'status', width: 100, render: v => (v ? <Tag color='green'>{v}</Tag> : '-') },
     {
       title: '操作',
       key: 'action',
       width: 160,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: () => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button style={{ padding: 0, height: 'auto' }} type='link'>
@@ -44,7 +45,40 @@ const ProductList: FC = () => {
     const run = async () => {
       setTableLoading(true)
       const params = { ...tableQuery, ...form.getFieldsValue() }
-      const data = await getPointsProductList(params)
+      // const data = await getPointsProductList(params)
+      await new Promise(resolve => setTimeout(resolve, 500))
+      const data = await Promise.resolve({
+        list: [
+          {
+            id: 1,
+            productName: '无线蓝牙耳机',
+            stock: 50,
+            marketPrice: 299,
+            needPoints: 5000,
+            addDate: '2025-09-10 14:20:00',
+            status: '启用'
+          },
+          {
+            id: 2,
+            productName: '智能手环',
+            stock: 100,
+            marketPrice: 199,
+            needPoints: 1000,
+            addDate: '2025-09-12 09:15:00',
+            status: '启用'
+          },
+          {
+            id: 3,
+            productName: '便携式充电宝',
+            stock: 75,
+            marketPrice: 149,
+            needPoints: 2000,
+            addDate: '2025-09-14 16:30:00',
+            status: '停用'
+          }
+        ],
+        total: 3
+      })
       const { list, total } = data as unknown as APIResult
       setTableData(list)
       setTableTotal(total)

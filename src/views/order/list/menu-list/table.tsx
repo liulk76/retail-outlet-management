@@ -262,9 +262,9 @@ const EditableTable: React.FC<any> = ({ items = [], onChange, loading = false })
           )
         }}
       />
-      <Button style={{ width: '100%' }} icon={<PlusOutlined />} type='dashed' onClick={handleAdd} disabled={loading}>
+      {/* <Button style={{ width: '100%' }} icon={<PlusOutlined />} type='dashed' onClick={handleAdd} disabled={loading}>
         新增
-      </Button>
+      </Button> */}
     </div>
   )
 }

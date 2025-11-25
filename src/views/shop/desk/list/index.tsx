@@ -57,6 +57,7 @@ const DeskList: FC = () => {
       width: 200,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button style={{ padding: 0, height: 'auto' }} type='link'>
@@ -183,9 +184,9 @@ const DeskList: FC = () => {
               }}
             >
               <Space>
-                <Button disabled={tableLoading} type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
+                {/* <Button disabled={tableLoading} type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   disabled={tableLoading}
                   type='primary'

@@ -105,6 +105,7 @@ const TableBasic: FC = () => {
       title: '操作',
       key: 'action',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space>
           <Button disabled={record.forbid} onClick={() => handleEdit(record)}>

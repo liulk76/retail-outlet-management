@@ -82,7 +82,7 @@ const TableBasic: FC = () => {
       title: '下单时间',
       dataIndex: 'createTime',
       sorter: true,
-      width: 150,
+      width: 180,
       render: value => (value ? dayjs(value).format('YYYY-MM-DD HH:mm:ss') : '-')
     },
     {
@@ -139,7 +139,7 @@ const TableBasic: FC = () => {
       title: '支付时间',
       dataIndex: 'payTime',
       sorter: true,
-      width: 150,
+      width: 180,
       render: value => (value ? dayjs(value).format('YYYY-MM-DD HH:mm:ss') : '-')
     },
     {
@@ -163,6 +163,7 @@ const TableBasic: FC = () => {
       width: 160,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button
@@ -433,9 +434,9 @@ const TableBasic: FC = () => {
               }}
             >
               <Space>
-                <Button icon={<PlusOutlined />} type='primary' onClick={() => openEditOrder()}>
+                {/* <Button icon={<PlusOutlined />} type='primary' onClick={() => openEditOrder()}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   disabled={tableLoading}
                   type='primary'

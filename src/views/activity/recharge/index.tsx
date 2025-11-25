@@ -29,7 +29,43 @@ const RechargeList: FC = () => {
       setTableLoading(true)
       const filters = form.getFieldsValue()
       const params = { ...tableQuery, ...filters }
-      const data = await getRechargeRecordList(params)
+      // const data = await getRechargeRecordList(params)
+      await new Promise(resolve => setTimeout(resolve, 500))
+      const data = await Promise.resolve({
+        list: [
+          {
+            id: 1,
+            rechargeOrderCode: 'CZ202309150001',
+            memberName: '张先生',
+            phone: '15974293369',
+            rechargeAmount: 100,
+            arrivalAmount: 120,
+            rechargeDate: '2023-09-15 10:30:00',
+            payMethod: '微信'
+          },
+          {
+            id: 2,
+            rechargeOrderCode: 'CZ202309150002',
+            memberName: '徐女士',
+            phone: '18847558633',
+            rechargeAmount: 100,
+            arrivalAmount: 120,
+            rechargeDate: '2023-09-15 11:00:00',
+            payMethod: '支付宝'
+          },
+          {
+            id: 3,
+            rechargeOrderCode: 'CZ202309150003',
+            memberName: '李先生',
+            phone: '13765432987',
+            rechargeAmount: 200,
+            arrivalAmount: 250,
+            rechargeDate: '2023-09-15 11:30:00',
+            payMethod: '现金'
+          }
+        ],
+        total: 2
+      })
       const { list, total } = data as unknown as APIResult
       setTableData(list)
       setTableTotal(total)

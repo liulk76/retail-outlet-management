@@ -1,6 +1,6 @@
 import type { ColumnsType } from 'antd/es/table'
 import { type FC, useEffect, useState } from 'react'
-import { Button, Card, Col, Divider, Form, Input, Row, Space, Table } from 'antd'
+import { Button, Card, Col, Divider, Form, Input, Row, Space, Table, Tag } from 'antd'
 import { ClearOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { PageWrapper } from '@/components/Page'
 import { getPointsExchangeList } from '@/api'
@@ -28,7 +28,43 @@ const PointsExchangeList: FC = () => {
     const run = async () => {
       setTableLoading(true)
       const params = { ...tableQuery, ...form.getFieldsValue() }
-      const data = await getPointsExchangeList(params)
+      // const data = await getPointsExchangeList(params)
+      await new Promise(resolve => setTimeout(resolve, 500))
+      const data = await Promise.resolve({
+        list: [
+          {
+            id: 1,
+            orderCode: 'DH202309150001',
+            memberName: '张先生',
+            phone: '15974293369',
+            productName: '无线蓝牙耳机',
+            usePoints: 5000,
+            exchangeDate: '2025-10-15 10:30:00',
+            remark: '-'
+          },
+          {
+            id: 2,
+            orderCode: 'DH202309150002',
+            memberName: '徐女士',
+            phone: '18847558633',
+            productName: '智能手环',
+            usePoints: 1000,
+            exchangeDate: '2025-11-15 11:00:00',
+            remark: '-'
+          },
+          {
+            id: 3,
+            orderCode: 'DH202309150003',
+            memberName: '李先生',
+            phone: '13765432987',
+            productName: '便携式充电宝',
+            usePoints: 2000,
+            exchangeDate: '2025-05-15 11:30:00',
+            remark: '-'
+          }
+        ],
+        total: 3
+      })
       const { list, total } = data as unknown as APIResult
       setTableData(list)
       setTableTotal(total)
@@ -67,9 +103,9 @@ const PointsExchangeList: FC = () => {
               }}
             >
               <Space>
-                <Button color='cyan' icon={<PlusOutlined />}>
+                {/* <Button color='cyan' icon={<PlusOutlined />}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   type='primary'
                   onClick={() => setTableQuery({ ...tableQuery, current: 1 })}

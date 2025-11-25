@@ -100,6 +100,7 @@ const CategoryList: FC = () => {
       width: 120,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button style={{ padding: 0, height: 'auto' }} type='link' onClick={() => openEditModal(record)}>
@@ -163,9 +164,9 @@ const CategoryList: FC = () => {
               }}
             >
               <Space>
-                <Button disabled={tableLoading} type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
+                {/* <Button disabled={tableLoading} type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   disabled={tableLoading}
                   type='primary'

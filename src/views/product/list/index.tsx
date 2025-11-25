@@ -66,6 +66,7 @@ const ProductList: FC = () => {
       width: 120,
       fixed: 'right',
       align: 'center',
+      hidden: true,
       render: (_, record: any) => (
         <Space split={<span style={{ color: '#f0f0f0' }}>|</span>}>
           <Button style={{ padding: 0, height: 'auto' }} type='link' onClick={() => openEditModal(record)}>
@@ -217,9 +218,9 @@ const ProductList: FC = () => {
               }}
             >
               <Space>
-                <Button type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
+                {/* <Button type='primary' icon={<PlusOutlined />} onClick={() => openEditModal()}>
                   新增
-                </Button>
+                </Button> */}
                 <Button
                   type='primary'
                   onClick={() => setTableQuery({ ...tableQuery, current: 1 })}

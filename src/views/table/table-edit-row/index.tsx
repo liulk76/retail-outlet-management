@@ -255,6 +255,7 @@ const TableEditRow: React.FC = () => {
       dataIndex: 'action',
       width: 70,
       align: 'center',
+      hidden: true,
       // @ts-ignore
       render: (_: any, record: DataItem) => {
         const editable = isEditing(record)
