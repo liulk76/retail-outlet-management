@@ -79,16 +79,16 @@ const LoginPage: FC = () => {
           className={styles['login-box-form']}
           onFinish={handleLogin}
         >
-          <Form.Item name='email' rules={[{ required: true, message: '请输入邮箱' }]}>
+          <Form.Item name='email' rules={[{ required: true, message: '请输入登录账户' }]}>
             <Input
-              placeholder='admin@qq.com'
+              placeholder='请输入登录账户'
               prefix={<UserOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} rev={undefined} />}
             />
           </Form.Item>
           <Form.Item name='password' rules={[{ required: true, message: '请输入密码' }]}>
             <Input
               type='password'
-              placeholder='20251122'
+              placeholder='请输入密码'
               prefix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} rev={undefined} />}
             />
           </Form.Item>
