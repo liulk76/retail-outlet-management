@@ -10,6 +10,7 @@ import { TOKEN_KEY } from '@/enums/cacheEnum'
 import { supabase } from '@/services/supabaseClient'
 import classNames from 'classnames'
 import styles from './index.module.less'
+import logoImg from '@/assets/images/logo.png'
 
 const LoginPage: FC = () => {
   const [form] = Form.useForm()
@@ -66,8 +67,8 @@ const LoginPage: FC = () => {
     <div className={styles['login-wrapper']}>
       <div className={styles['login-box']}>
         <div className={styles['login-box-title']}>
-          {/* <img src={logoIcon} alt='icon' /> */}
-          <p>用户登录</p>
+          <img style={{ width: 70, height: 60, marginBottom: 8 }} src={logoImg} alt='icon' />
+          <p>餐饮零售管理系统</p>
         </div>
         <Form
           form={form}
